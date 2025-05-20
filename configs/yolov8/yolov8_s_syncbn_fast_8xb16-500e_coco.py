@@ -10,7 +10,7 @@ train_data_prefix = 'train2017/'  # Prefix of train image path
 val_ann_file = 'annotations/instances_val2017.json'
 val_data_prefix = 'val2017/'  # Prefix of val image path
 
-num_classes = 80  # Number of classes for classification
+num_classes = 10  # Number of classes for classification
 # Batch size of a single GPU during training
 train_batch_size_per_gpu = 16
 # Worker to pre-fetch data for each single GPU during training
@@ -99,8 +99,8 @@ model = dict(
     type='YOLODetector',
     data_preprocessor=dict(
         type='YOLOv5DetDataPreprocessor',
-        mean=[128., 128., 128.],
-        std=[128., 128., 128.],
+        mean=[0., 0., 0.],
+        std=[255., 255., 255.],
         bgr_to_rgb=True),
     backbone=dict(
         type='YOLOv8CSPDarknet',
@@ -109,7 +109,7 @@ model = dict(
         deepen_factor=deepen_factor,
         widen_factor=widen_factor,
         norm_cfg=norm_cfg,
-        act_cfg=dict(type='ReLU', inplace=True)),
+        act_cfg=dict(type='SiLU', inplace=True)),
     neck=dict(
         type='YOLOv8PAFPN',
         deepen_factor=deepen_factor,
