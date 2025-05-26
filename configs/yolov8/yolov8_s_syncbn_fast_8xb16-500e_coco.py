@@ -99,8 +99,8 @@ model = dict(
     type='YOLODetector',
     data_preprocessor=dict(
         type='YOLOv5DetDataPreprocessor',
-        mean=[0., 0., 0.],
-        std=[255., 255., 255.],
+        mean=[128., 128., 128.],
+        std=[128., 128., 128.],
         bgr_to_rgb=True),
     backbone=dict(
         type='YOLOv8CSPDarknet',
@@ -109,7 +109,7 @@ model = dict(
         deepen_factor=deepen_factor,
         widen_factor=widen_factor,
         norm_cfg=norm_cfg,
-        act_cfg=dict(type='SiLU', inplace=True)),
+        act_cfg=dict(type='ReLU', inplace=True)),
     neck=dict(
         type='YOLOv8PAFPN',
         deepen_factor=deepen_factor,
